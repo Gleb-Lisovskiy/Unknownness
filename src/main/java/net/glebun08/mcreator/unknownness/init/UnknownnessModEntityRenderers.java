@@ -10,13 +10,11 @@ import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.api.distmarker.Dist;
 
 import net.glebun08.mcreator.unknownness.client.renderer.ShadowRenderer;
-import net.glebun08.mcreator.unknownness.client.renderer.Shadow1Renderer;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class UnknownnessModEntityRenderers {
 	@SubscribeEvent
 	public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
 		event.registerEntityRenderer(UnknownnessModEntities.SHADOW.get(), ShadowRenderer::new);
-		event.registerEntityRenderer(UnknownnessModEntities.SHADOW_1.get(), Shadow1Renderer::new);
 	}
 }

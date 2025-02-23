@@ -17,7 +17,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Entity;
 
 import net.glebun08.mcreator.unknownness.entity.ShadowEntity;
-import net.glebun08.mcreator.unknownness.entity.Shadow1Entity;
 import net.glebun08.mcreator.unknownness.UnknownnessMod;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -25,8 +24,6 @@ public class UnknownnessModEntities {
 	public static final DeferredRegister<EntityType<?>> REGISTRY = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, UnknownnessMod.MODID);
 	public static final RegistryObject<EntityType<ShadowEntity>> SHADOW = register("shadow",
 			EntityType.Builder.<ShadowEntity>of(ShadowEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).setCustomClientFactory(ShadowEntity::new).fireImmune().sized(0.6f, 1.8f));
-	public static final RegistryObject<EntityType<Shadow1Entity>> SHADOW_1 = register("shadow_1",
-			EntityType.Builder.<Shadow1Entity>of(Shadow1Entity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).setCustomClientFactory(Shadow1Entity::new).fireImmune().sized(0.6f, 1.8f));
 
 	// Start of user code block custom entities
 	// End of user code block custom entities
@@ -38,13 +35,11 @@ public class UnknownnessModEntities {
 	public static void init(FMLCommonSetupEvent event) {
 		event.enqueueWork(() -> {
 			ShadowEntity.init();
-			Shadow1Entity.init();
 		});
 	}
 
 	@SubscribeEvent
 	public static void registerAttributes(EntityAttributeCreationEvent event) {
 		event.put(SHADOW.get(), ShadowEntity.createAttributes().build());
-		event.put(SHADOW_1.get(), Shadow1Entity.createAttributes().build());
 	}
 }

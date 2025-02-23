@@ -15,6 +15,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.commands.Commands;
 
 import net.glebun08.mcreator.unknownness.procedures.CommandToggleEventsProcedure;
+import net.glebun08.mcreator.unknownness.procedures.CommandShowRateProcedure;
 import net.glebun08.mcreator.unknownness.procedures.CommandRandomEventProcedure;
 import net.glebun08.mcreator.unknownness.procedures.CommandEventRateProcedure;
 import net.glebun08.mcreator.unknownness.procedures.CommandEventExecuteProcedure;
@@ -38,7 +39,7 @@ public class UnknownnessCommand {
 			if (entity != null)
 				direction = entity.getDirection();
 
-			CommandRandomEventProcedure.execute(world);
+			CommandRandomEventProcedure.execute(world, x, y, z, entity);
 			return 0;
 		})).then(Commands.argument("int", DoubleArgumentType.doubleArg(1, 30)).executes(arguments -> {
 			Level world = arguments.getSource().getUnsidedLevel();
@@ -54,7 +55,21 @@ public class UnknownnessCommand {
 
 			CommandEventExecuteProcedure.execute(world, arguments);
 			return 0;
-		}))).then(Commands.literal("rate").then(Commands.argument("tick", DoubleArgumentType.doubleArg(0)).executes(arguments -> {
+		}))).then(Commands.literal("rate").executes(arguments -> {
+			Level world = arguments.getSource().getUnsidedLevel();
+			double x = arguments.getSource().getPosition().x();
+			double y = arguments.getSource().getPosition().y();
+			double z = arguments.getSource().getPosition().z();
+			Entity entity = arguments.getSource().getEntity();
+			if (entity == null && world instanceof ServerLevel _servLevel)
+				entity = FakePlayerFactory.getMinecraft(_servLevel);
+			Direction direction = Direction.DOWN;
+			if (entity != null)
+				direction = entity.getDirection();
+
+			CommandShowRateProcedure.execute(entity);
+			return 0;
+		}).then(Commands.argument("tick", DoubleArgumentType.doubleArg(0)).executes(arguments -> {
 			Level world = arguments.getSource().getUnsidedLevel();
 			double x = arguments.getSource().getPosition().x();
 			double y = arguments.getSource().getPosition().y();

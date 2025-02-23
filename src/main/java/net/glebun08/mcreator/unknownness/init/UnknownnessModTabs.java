@@ -23,7 +23,6 @@ public class UnknownnessModTabs {
 	public static void buildTabContentsVanilla(BuildCreativeModeTabContentsEvent tabData) {
 		if (tabData.getTabKey() == CreativeModeTabs.SPAWN_EGGS) {
 			tabData.accept(UnknownnessModItems.SHADOW_SPAWN_EGG.get());
-			tabData.accept(UnknownnessModItems.SHADOW_1_SPAWN_EGG.get());
 		}
 	}
 }

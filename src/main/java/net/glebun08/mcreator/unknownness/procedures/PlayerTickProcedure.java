@@ -28,8 +28,14 @@ public class PlayerTickProcedure {
 	private static void execute(@Nullable Event event, LevelAccessor world, double x, double y, double z, Entity entity) {
 		if (entity == null)
 			return;
-		if (UnknownnessModVariables.MapVariables.get(world).event > 0) {
-			EventExecuteProcedure.execute(world, x, y, z, entity);
+		if (UnknownnessModVariables.MapVariables.get(world).Players == 1 && !(entity.getDisplayName().getString()).equals(UnknownnessModVariables.MapVariables.get(world).FirstPlayer)) {
+			UnknownnessModVariables.MapVariables.get(world).FirstPlayer = entity.getDisplayName().getString();
+			UnknownnessModVariables.MapVariables.get(world).syncData(world);
+		}
+		if ((entity.getDisplayName().getString()).equals(UnknownnessModVariables.MapVariables.get(world).FirstPlayer)) {
+			if (UnknownnessModVariables.MapVariables.get(world).event > 0) {
+				EventExecuteProcedure.execute(world, x, y, z, entity);
+			}
 		}
 	}
 }

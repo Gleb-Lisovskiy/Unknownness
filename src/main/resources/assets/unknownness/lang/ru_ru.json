@@ -2,7 +2,5 @@
   "command.event.toggle.on": "включил эвенты",
   "command.event.toggle.off": "выключил эвенты",
   "entity.unknownness.shadow": "Shadow",
-  "item.unknownness.shadow_spawn_egg": "Shadow Spawn Egg",
-  "entity.unknownness.shadow_1": "Shadow",
-  "item.unknownness.shadow_1_spawn_egg": "Shadow Spawn Egg"
+  "item.unknownness.shadow_spawn_egg": "Shadow Spawn Egg"
 }

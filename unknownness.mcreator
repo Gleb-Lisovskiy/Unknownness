@@ -104,9 +104,9 @@
       "registry_name": "shadow",
       "metadata": {
         "files": [
-          "src/main/java/net/glebun08/mcreator/unknownness/entity/ShadowEntity.java",
+          "src/main/resources/assets/unknownness/models/item/shadow_spawn_egg.json",
           "src/main/java/net/glebun08/mcreator/unknownness/client/renderer/ShadowRenderer.java",
-          "src/main/resources/assets/unknownness/models/item/shadow_spawn_egg.json"
+          "src/main/java/net/glebun08/mcreator/unknownness/entity/ShadowEntity.java"
         ]
       },
       "path": "~/Entities/Shadow"
@@ -122,6 +122,22 @@
           "src/main/java/net/glebun08/mcreator/unknownness/procedures/CommandRandomEventProcedure.java"
         ],
         "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
           {
             "name": "world",
             "type": "world"
@@ -249,35 +265,100 @@
       "path": "~/Events"
     },
     {
-      "name": "Shadow1",
-      "type": "livingentity",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "shadow_1",
-      "metadata": {
-        "files": [
-          "src/main/java/net/glebun08/mcreator/unknownness/entity/Shadow1Entity.java",
-          "src/main/resources/assets/unknownness/models/item/shadow_1_spawn_egg.json",
-          "src/main/java/net/glebun08/mcreator/unknownness/client/renderer/Shadow1Renderer.java"
-        ]
-      },
-      "path": "~/Entities/Shadow"
-    },
-    {
-      "name": "Shadow1Tick",
+      "name": "ShadowHit",
       "type": "procedure",
       "compiles": true,
       "locked_code": false,
-      "registry_name": "shadow_1_tick",
+      "registry_name": "shadow_hit",
       "metadata": {
         "files": [
-          "src/main/java/net/glebun08/mcreator/unknownness/procedures/Shadow1TickProcedure.java"
+          "src/main/java/net/glebun08/mcreator/unknownness/procedures/ShadowHitProcedure.java"
         ],
         "dependencies": [
           {
             "name": "entity",
             "type": "entity"
           },
+          {
+            "name": "sourceentity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      },
+      "path": "~/Entities/Shadow"
+    },
+    {
+      "name": "CommandShowRate",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "command_show_rate",
+      "metadata": {
+        "files": [
+          "src/main/java/net/glebun08/mcreator/unknownness/procedures/CommandShowRateProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ]
+      },
+      "path": "~/Commands"
+    },
+    {
+      "name": "PlayerJoin",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "player_join",
+      "metadata": {
+        "files": [
+          "src/main/java/net/glebun08/mcreator/unknownness/procedures/PlayerJoinProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      },
+      "path": "~/Player"
+    },
+    {
+      "name": "PlayerExit",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "player_exit",
+      "metadata": {
+        "files": [
+          "src/main/java/net/glebun08/mcreator/unknownness/procedures/PlayerExitProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      },
+      "path": "~/Player"
+    },
+    {
+      "name": "Event1",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "event_1",
+      "metadata": {
+        "files": [
+          "src/main/java/net/glebun08/mcreator/unknownness/procedures/Event1Procedure.java"
+        ],
+        "dependencies": [
           {
             "name": "x",
             "type": "number"
@@ -296,25 +377,21 @@
           }
         ]
       },
-      "path": "~/Entities/Shadow"
+      "path": "~/Events"
     },
     {
-      "name": "Shadow1Hit",
+      "name": "Event2",
       "type": "procedure",
       "compiles": true,
       "locked_code": false,
-      "registry_name": "shadow_1_hit",
+      "registry_name": "event_2",
       "metadata": {
         "files": [
-          "src/main/java/net/glebun08/mcreator/unknownness/procedures/Shadow1HitProcedure.java"
+          "src/main/java/net/glebun08/mcreator/unknownness/procedures/Event2Procedure.java"
         ],
         "dependencies": [
           {
             "name": "entity",
-            "type": "entity"
-          },
-          {
-            "name": "sourceentity",
             "type": "entity"
           },
           {
@@ -323,7 +400,69 @@
           }
         ]
       },
-      "path": "~/Entities/Shadow"
+      "path": "~/Events"
+    },
+    {
+      "name": "Event3",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "event_3",
+      "metadata": {
+        "files": [
+          "src/main/java/net/glebun08/mcreator/unknownness/procedures/Event3Procedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      },
+      "path": "~/Events"
+    },
+    {
+      "name": "Event4",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "event_4",
+      "metadata": {
+        "files": [
+          "src/main/java/net/glebun08/mcreator/unknownness/procedures/Event4Procedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      },
+      "path": "~/Events"
     }
   ],
   "variable_elements": [
@@ -344,6 +483,18 @@
       "type": "number",
       "scope": "map",
       "value": "0"
+    },
+    {
+      "name": "FirstPlayer",
+      "type": "string",
+      "scope": "map",
+      "value": "\"\""
+    },
+    {
+      "name": "Players",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
     }
   ],
   "sound_elements": [],
@@ -354,17 +505,13 @@
       "command.event.toggle.on": "включил эвенты",
       "command.event.toggle.off": "выключил эвенты",
       "entity.unknownness.shadow": "Shadow",
-      "item.unknownness.shadow_spawn_egg": "Shadow Spawn Egg",
-      "entity.unknownness.shadow_1": "Shadow",
-      "item.unknownness.shadow_1_spawn_egg": "Shadow Spawn Egg"
+      "item.unknownness.shadow_spawn_egg": "Shadow Spawn Egg"
     },
     "en_us": {
       "command.event.toggle.on": "toggled events to on",
       "command.event.toggle.off": "toggled events to off",
       "entity.unknownness.shadow": "Shadow",
-      "item.unknownness.shadow_spawn_egg": "Shadow Spawn Egg",
-      "entity.unknownness.shadow_1": "Shadow",
-      "item.unknownness.shadow_1_spawn_egg": "Shadow Spawn Egg"
+      "item.unknownness.shadow_spawn_egg": "Shadow Spawn Egg"
     }
   },
   "foldersRoot": {
@@ -396,10 +543,10 @@
   "workspaceSettings": {
     "modid": "unknownness",
     "modName": "Unknownness",
-    "version": "0.1.0",
+    "version": "0.0.1 Demo",
     "author": "Glebun08, MCreator",
     "websiteURL": "https://mcreator.net",
-    "license": "Not specified",
+    "license": "MIT License",
     "serverSideOnly": false,
     "requiredMods": [],
     "dependencies": [],

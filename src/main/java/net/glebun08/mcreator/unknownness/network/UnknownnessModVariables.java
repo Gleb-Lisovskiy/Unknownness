@@ -90,6 +90,8 @@ public class UnknownnessModVariables {
 		public double event_cd = 600.0;
 		public boolean events_toggle = true;
 		public double event = 0;
+		public String FirstPlayer = "\"\"";
+		public double Players = 0;
 
 		public static MapVariables load(CompoundTag tag) {
 			MapVariables data = new MapVariables();
@@ -101,6 +103,8 @@ public class UnknownnessModVariables {
 			event_cd = nbt.getDouble("event_cd");
 			events_toggle = nbt.getBoolean("events_toggle");
 			event = nbt.getDouble("event");
+			FirstPlayer = nbt.getString("FirstPlayer");
+			Players = nbt.getDouble("Players");
 		}
 
 		@Override
@@ -108,6 +112,8 @@ public class UnknownnessModVariables {
 			nbt.putDouble("event_cd", event_cd);
 			nbt.putBoolean("events_toggle", events_toggle);
 			nbt.putDouble("event", event);
+			nbt.putString("FirstPlayer", FirstPlayer);
+			nbt.putDouble("Players", Players);
 			return nbt;
 		}
 

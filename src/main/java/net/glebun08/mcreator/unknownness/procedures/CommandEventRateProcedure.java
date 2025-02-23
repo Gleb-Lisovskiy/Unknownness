@@ -20,7 +20,7 @@ public class CommandEventRateProcedure {
 		if (!file.exists()) {
 			SetupconfigProcedure.execute();
 		}
-		sub1.addProperty("rate", (DoubleArgumentType.getDouble(arguments, "tick")));
+		sub1.addProperty("rate", Math.round(DoubleArgumentType.getDouble(arguments, "tick")));
 		main.add("events", sub1);
 		{
 			com.google.gson.Gson mainGSONBuilderVariable = new com.google.gson.GsonBuilder().setPrettyPrinting().create();

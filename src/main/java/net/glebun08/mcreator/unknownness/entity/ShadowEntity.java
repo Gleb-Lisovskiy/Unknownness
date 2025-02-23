@@ -32,6 +32,7 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.Packet;
 
 import net.glebun08.mcreator.unknownness.procedures.ShadowTickProcedure;
+import net.glebun08.mcreator.unknownness.procedures.ShadowHitProcedure;
 import net.glebun08.mcreator.unknownness.init.UnknownnessModEntities;
 
 public class ShadowEntity extends Monster {
@@ -136,6 +137,12 @@ public class ShadowEntity extends Monster {
 	public void baseTick() {
 		super.baseTick();
 		ShadowTickProcedure.execute(this.level(), this.getX(), this.getY(), this.getZ(), this);
+	}
+
+	@Override
+	public void playerTouch(Player sourceentity) {
+		super.playerTouch(sourceentity);
+		ShadowHitProcedure.execute(this.level(), this, sourceentity);
 	}
 
 	@Override

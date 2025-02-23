@@ -2,7 +2,5 @@
   "command.event.toggle.on": "toggled events to on",
   "command.event.toggle.off": "toggled events to off",
   "entity.unknownness.shadow": "Shadow",
-  "item.unknownness.shadow_spawn_egg": "Shadow Spawn Egg",
-  "entity.unknownness.shadow_1": "Shadow",
-  "item.unknownness.shadow_1_spawn_egg": "Shadow Spawn Egg"
+  "item.unknownness.shadow_spawn_egg": "Shadow Spawn Egg"
 }

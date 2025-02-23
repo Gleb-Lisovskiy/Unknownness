@@ -57,8 +57,8 @@ public class SystemEventsProcedure {
 							sub1 = main.get("events").getAsJsonObject();
 							UnknownnessModVariables.MapVariables.get(world).event_cd = sub1.get("rate").getAsDouble();
 							UnknownnessModVariables.MapVariables.get(world).syncData(world);
-							if (Mth.nextInt(RandomSource.create(), 1, 100) == 25) {
-								UnknownnessModVariables.MapVariables.get(world).event = Mth.nextInt(RandomSource.create(), 1, 30);
+							if (Math.random() == 0.8) {
+								UnknownnessModVariables.MapVariables.get(world).event = Mth.nextInt(RandomSource.create(), 1, 12);
 								UnknownnessModVariables.MapVariables.get(world).syncData(world);
 							}
 						} catch (IOException e) {

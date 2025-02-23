@@ -4,11 +4,13 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.commands.CommandSource;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.commands.arguments.EntityAnchorArgument;
 
 import java.util.List;
 import java.util.Comparator;
@@ -17,27 +19,46 @@ public class ShadowTickProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z, Entity entity) {
 		if (entity == null)
 			return;
+		double y_player = 0;
+		if (entity.getPersistentData().getDouble("todespawn") > 1) {
+			entity.getPersistentData().putDouble("todespawn", (entity.getPersistentData().getDouble("todespawn") - 1));
+		}
+		if (entity.getPersistentData().getDouble("todespawn") == 1) {
+			if (!entity.level().isClientSide())
+				entity.discard();
+		}
+		if (Math.random() == 0.7 && entity.getPersistentData().getBoolean("readytohit") == false) {
+			entity.getPersistentData().putBoolean("readytohit", true);
+		}
+		if (Math.random() == 0.5) {
+			if (!entity.level().isClientSide())
+				entity.discard();
+		}
 		if (entity.onGround()) {
 			{
-				Entity _ent = entity;
-				if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-					_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
-							_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "execute as @s at @s run tp @s ~ ~ ~ facing entity @p[distance=..16]");
-				}
-			}
-			{
 				final Vec3 _center = new Vec3(x, y, z);
-				List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(16 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
+				List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(24 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
 				for (Entity entityiterator : _entfound) {
 					if (entityiterator instanceof Player) {
-						if (entity instanceof Mob _mob) {
-							_mob.setNoAi(true);
-						}
-					} else {
-						if (entity instanceof Mob _mob) {
-							_mob.setNoAi(false);
-						}
+						if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
+							_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 2, 10, false, false));
 					}
+				}
+			}
+		}
+		{
+			final Vec3 _center = new Vec3(x, y, z);
+			List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(24 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
+			for (Entity entityiterator : _entfound) {
+				if (entityiterator instanceof Player) {
+					y_player = entityiterator.getY() + 1.5;
+					if (entityiterator.getPose() == Pose.SWIMMING || entityiterator instanceof LivingEntity _livEnt15 && _livEnt15.isSleeping()) {
+						y_player = entityiterator.getY();
+					}
+					if (entityiterator.isShiftKeyDown()) {
+						y_player = entityiterator.getY() + 1.2;
+					}
+					entity.lookAt(EntityAnchorArgument.Anchor.EYES, new Vec3((entityiterator.getX()), y_player, (entityiterator.getZ())));
 				}
 			}
 		}
