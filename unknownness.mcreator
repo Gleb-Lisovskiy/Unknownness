@@ -40,22 +40,6 @@
           {
             "name": "entity",
             "type": "entity"
-          },
-          {
-            "name": "x",
-            "type": "number"
-          },
-          {
-            "name": "y",
-            "type": "number"
-          },
-          {
-            "name": "z",
-            "type": "number"
-          },
-          {
-            "name": "world",
-            "type": "world"
           }
         ]
       },
@@ -121,28 +105,7 @@
         "files": [
           "src/main/java/net/glebun08/mcreator/unknownness/procedures/CommandRandomEventProcedure.java"
         ],
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          },
-          {
-            "name": "x",
-            "type": "number"
-          },
-          {
-            "name": "y",
-            "type": "number"
-          },
-          {
-            "name": "z",
-            "type": "number"
-          },
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ]
+        "dependencies": []
       },
       "path": "~/Commands"
     },
@@ -160,10 +123,6 @@
           {
             "name": "arguments",
             "type": "cmdcontext"
-          },
-          {
-            "name": "world",
-            "type": "world"
           }
         ]
       },
@@ -183,10 +142,6 @@
           {
             "name": "arguments",
             "type": "cmdcontext"
-          },
-          {
-            "name": "world",
-            "type": "world"
           }
         ]
       },
@@ -221,12 +176,7 @@
         "files": [
           "src/main/java/net/glebun08/mcreator/unknownness/procedures/SystemEventsProcedure.java"
         ],
-        "dependencies": [
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ]
+        "dependencies": []
       }
     },
     {
@@ -239,28 +189,7 @@
         "files": [
           "src/main/java/net/glebun08/mcreator/unknownness/procedures/EventExecuteProcedure.java"
         ],
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          },
-          {
-            "name": "x",
-            "type": "number"
-          },
-          {
-            "name": "y",
-            "type": "number"
-          },
-          {
-            "name": "z",
-            "type": "number"
-          },
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ]
+        "dependencies": []
       },
       "path": "~/Events"
     },
@@ -320,12 +249,7 @@
         "files": [
           "src/main/java/net/glebun08/mcreator/unknownness/procedures/PlayerJoinProcedure.java"
         ],
-        "dependencies": [
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ]
+        "dependencies": []
       },
       "path": "~/Player"
     },
@@ -339,12 +263,7 @@
         "files": [
           "src/main/java/net/glebun08/mcreator/unknownness/procedures/PlayerExitProcedure.java"
         ],
-        "dependencies": [
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ]
+        "dependencies": []
       },
       "path": "~/Player"
     },
@@ -443,58 +362,81 @@
         "files": [
           "src/main/java/net/glebun08/mcreator/unknownness/procedures/Event4Procedure.java"
         ],
-        "dependencies": [
-          {
-            "name": "x",
-            "type": "number"
-          },
-          {
-            "name": "y",
-            "type": "number"
-          },
-          {
-            "name": "z",
-            "type": "number"
-          },
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ]
+        "dependencies": []
       },
       "path": "~/Events"
+    },
+    {
+      "name": "Event4Tick",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "event_4_tick",
+      "metadata": {
+        "files": [
+          "src/main/java/net/glebun08/mcreator/unknownness/procedures/Event4TickProcedure.java"
+        ],
+        "dependencies": []
+      },
+      "path": "~/Events"
+    },
+    {
+      "name": "Commandreset",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "commandreset",
+      "metadata": {
+        "files": [
+          "src/main/java/net/glebun08/mcreator/unknownness/procedures/CommandresetProcedure.java"
+        ],
+        "dependencies": []
+      },
+      "path": "~/Commands"
     }
   ],
   "variable_elements": [
     {
-      "name": "event_cd",
-      "type": "number",
-      "scope": "map",
-      "value": "600.0"
-    },
-    {
-      "name": "events_toggle",
-      "type": "logic",
-      "scope": "map",
-      "value": "true"
+      "name": "FirstPlayer",
+      "type": "string",
+      "scope": "global",
+      "value": "\"\""
     },
     {
       "name": "event",
       "type": "number",
-      "scope": "map",
+      "scope": "global",
       "value": "0"
-    },
-    {
-      "name": "FirstPlayer",
-      "type": "string",
-      "scope": "map",
-      "value": "\"\""
     },
     {
       "name": "Players",
       "type": "number",
-      "scope": "map",
+      "scope": "global",
       "value": "0"
+    },
+    {
+      "name": "event_4",
+      "type": "number",
+      "scope": "global",
+      "value": "0"
+    },
+    {
+      "name": "event_cd",
+      "type": "number",
+      "scope": "global",
+      "value": "0.0"
+    },
+    {
+      "name": "events_toggle",
+      "type": "logic",
+      "scope": "global",
+      "value": "true"
+    },
+    {
+      "name": "all_shadow_despawn",
+      "type": "logic",
+      "scope": "global",
+      "value": "false"
     }
   ],
   "sound_elements": [],

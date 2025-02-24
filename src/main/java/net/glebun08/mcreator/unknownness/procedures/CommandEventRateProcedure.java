@@ -16,7 +16,7 @@ public class CommandEventRateProcedure {
 		File file = new File("");
 		com.google.gson.JsonObject sub1 = new com.google.gson.JsonObject();
 		com.google.gson.JsonObject main = new com.google.gson.JsonObject();
-		file = new File((FMLPaths.GAMEDIR.get().toString() + "/config/unknownness"), File.separator + "server-config.json");
+		file = new File((FMLPaths.GAMEDIR.get().toString() + "/config/unknownness"), File.separator + "common-config.json");
 		if (!file.exists()) {
 			SetupconfigProcedure.execute();
 		}

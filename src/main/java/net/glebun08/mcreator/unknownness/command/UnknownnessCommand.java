@@ -14,6 +14,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.core.Direction;
 import net.minecraft.commands.Commands;
 
+import net.glebun08.mcreator.unknownness.procedures.CommandresetProcedure;
 import net.glebun08.mcreator.unknownness.procedures.CommandToggleEventsProcedure;
 import net.glebun08.mcreator.unknownness.procedures.CommandShowRateProcedure;
 import net.glebun08.mcreator.unknownness.procedures.CommandRandomEventProcedure;
@@ -27,7 +28,7 @@ import com.mojang.brigadier.arguments.BoolArgumentType;
 public class UnknownnessCommand {
 	@SubscribeEvent
 	public static void registerCommand(RegisterCommandsEvent event) {
-		event.getDispatcher().register(Commands.literal("unknownness").requires(s -> s.hasPermission(4)).then(Commands.literal("events").then(Commands.literal("execute").then(Commands.literal("random").executes(arguments -> {
+		event.getDispatcher().register(Commands.literal("unknownness").requires(s -> s.hasPermission(4)).then(Commands.literal("events").then(Commands.literal("reset").executes(arguments -> {
 			Level world = arguments.getSource().getUnsidedLevel();
 			double x = arguments.getSource().getPosition().x();
 			double y = arguments.getSource().getPosition().y();
@@ -39,7 +40,21 @@ public class UnknownnessCommand {
 			if (entity != null)
 				direction = entity.getDirection();
 
-			CommandRandomEventProcedure.execute(world, x, y, z, entity);
+			CommandresetProcedure.execute();
+			return 0;
+		})).then(Commands.literal("execute").then(Commands.literal("random").executes(arguments -> {
+			Level world = arguments.getSource().getUnsidedLevel();
+			double x = arguments.getSource().getPosition().x();
+			double y = arguments.getSource().getPosition().y();
+			double z = arguments.getSource().getPosition().z();
+			Entity entity = arguments.getSource().getEntity();
+			if (entity == null && world instanceof ServerLevel _servLevel)
+				entity = FakePlayerFactory.getMinecraft(_servLevel);
+			Direction direction = Direction.DOWN;
+			if (entity != null)
+				direction = entity.getDirection();
+
+			CommandRandomEventProcedure.execute();
 			return 0;
 		})).then(Commands.argument("int", DoubleArgumentType.doubleArg(1, 30)).executes(arguments -> {
 			Level world = arguments.getSource().getUnsidedLevel();
@@ -53,7 +68,7 @@ public class UnknownnessCommand {
 			if (entity != null)
 				direction = entity.getDirection();
 
-			CommandEventExecuteProcedure.execute(world, arguments);
+			CommandEventExecuteProcedure.execute(arguments);
 			return 0;
 		}))).then(Commands.literal("rate").executes(arguments -> {
 			Level world = arguments.getSource().getUnsidedLevel();
@@ -95,7 +110,7 @@ public class UnknownnessCommand {
 			if (entity != null)
 				direction = entity.getDirection();
 
-			CommandToggleEventsProcedure.execute(world, arguments);
+			CommandToggleEventsProcedure.execute(arguments);
 			return 0;
 		})))));
 	}

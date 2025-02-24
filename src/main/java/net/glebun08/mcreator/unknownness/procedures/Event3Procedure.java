@@ -17,23 +17,21 @@ public class Event3Procedure {
 		double z_ = 0;
 		double y_ = 0;
 		double x_ = 0;
-		if (Math.random() == 0.7) {
-			y_ = y - 10;
-			x_ = x + Mth.nextDouble(RandomSource.create(), -70, 70);
-			z_ = z + Mth.nextDouble(RandomSource.create(), -70, 70);
-			for (int index0 = 0; index0 < 40; index0++) {
-				y_ = y_ + 1;
-				if (!((world.getBlockState(BlockPos.containing(x_, y_ - 1, z_))).getBlock() == Blocks.AIR) && (world.getBlockState(BlockPos.containing(x_, y_, z_))).getBlock() == Blocks.AIR) {
-					found = true;
-					break;
-				}
+		y_ = y - 10;
+		x_ = x + Mth.nextDouble(RandomSource.create(), -70, 70);
+		z_ = z + Mth.nextDouble(RandomSource.create(), -70, 70);
+		for (int index0 = 0; index0 < 40; index0++) {
+			y_ = y_ + 1;
+			if (!((world.getBlockState(BlockPos.containing(x_, y_ - 1, z_))).getBlock() == Blocks.AIR) && (world.getBlockState(BlockPos.containing(x_, y_, z_))).getBlock() == Blocks.AIR) {
+				found = true;
+				break;
 			}
-			if (found == true) {
-				if (world instanceof ServerLevel _level) {
-					Entity entityToSpawn = UnknownnessModEntities.SHADOW.get().spawn(_level, BlockPos.containing(x_, y_, z_), MobSpawnType.MOB_SUMMONED);
-					if (entityToSpawn != null) {
-						entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
-					}
+		}
+		if (found == true) {
+			if (world instanceof ServerLevel _level) {
+				Entity entityToSpawn = UnknownnessModEntities.SHADOW.get().spawn(_level, BlockPos.containing(x_, y_, z_), MobSpawnType.MOB_SUMMONED);
+				if (entityToSpawn != null) {
+					entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 				}
 			}
 		}

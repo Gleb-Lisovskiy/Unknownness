@@ -6,7 +6,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.event.TickEvent;
 
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.Mth;
 
@@ -24,26 +23,25 @@ public class SystemEventsProcedure {
 	@SubscribeEvent
 	public static void onWorldTick(TickEvent.LevelTickEvent event) {
 		if (event.phase == TickEvent.Phase.END) {
-			execute(event, event.level);
+			execute(event);
 		}
 	}
 
-	public static void execute(LevelAccessor world) {
-		execute(null, world);
+	public static void execute() {
+		execute(null);
 	}
 
-	private static void execute(@Nullable Event event, LevelAccessor world) {
+	private static void execute(@Nullable Event event) {
 		File file = new File("");
 		com.google.gson.JsonObject main = new com.google.gson.JsonObject();
 		com.google.gson.JsonObject sub1 = new com.google.gson.JsonObject();
-		if (UnknownnessModVariables.MapVariables.get(world).events_toggle == true) {
-			file = new File((FMLPaths.GAMEDIR.get().toString() + "/config/unknownness"), File.separator + "server-config.json");
-			if (UnknownnessModVariables.MapVariables.get(world).event_cd > 0) {
-				UnknownnessModVariables.MapVariables.get(world).event_cd = UnknownnessModVariables.MapVariables.get(world).event_cd - 1;
-				UnknownnessModVariables.MapVariables.get(world).syncData(world);
+		if (UnknownnessModVariables.events_toggle == true) {
+			file = new File((FMLPaths.GAMEDIR.get().toString() + "/config/unknownness"), File.separator + "common-config.json");
+			if (UnknownnessModVariables.event_cd > 0) {
+				UnknownnessModVariables.event_cd = UnknownnessModVariables.event_cd - 1;
 			}
 			if (file.exists()) {
-				if (UnknownnessModVariables.MapVariables.get(world).event_cd <= 0) {
+				if (UnknownnessModVariables.event_cd <= 0) {
 					{
 						try {
 							BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
@@ -55,11 +53,9 @@ public class SystemEventsProcedure {
 							bufferedReader.close();
 							main = new com.google.gson.Gson().fromJson(jsonstringbuilder.toString(), com.google.gson.JsonObject.class);
 							sub1 = main.get("events").getAsJsonObject();
-							UnknownnessModVariables.MapVariables.get(world).event_cd = sub1.get("rate").getAsDouble();
-							UnknownnessModVariables.MapVariables.get(world).syncData(world);
+							UnknownnessModVariables.event_cd = sub1.get("rate").getAsDouble();
 							if (Math.random() == 0.8) {
-								UnknownnessModVariables.MapVariables.get(world).event = Mth.nextInt(RandomSource.create(), 1, 12);
-								UnknownnessModVariables.MapVariables.get(world).syncData(world);
+								UnknownnessModVariables.event = Mth.nextInt(RandomSource.create(), 1, 12);
 							}
 						} catch (IOException e) {
 							e.printStackTrace();

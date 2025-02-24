@@ -24,10 +24,10 @@ public class SetupconfigProcedure {
 	}
 
 	private static void execute(@Nullable Event event) {
-		File file = new File("");
 		com.google.gson.JsonObject main = new com.google.gson.JsonObject();
 		com.google.gson.JsonObject sub1 = new com.google.gson.JsonObject();
-		file = new File((FMLPaths.GAMEDIR.get().toString() + "/config/unknownness"), File.separator + "server-config.json");
+		File file = new File("");
+		file = new File((FMLPaths.GAMEDIR.get().toString() + "/config/unknownness"), File.separator + "common-config.json");
 		if (!file.exists()) {
 			try {
 				file.getParentFile().mkdirs();
@@ -36,6 +36,7 @@ public class SetupconfigProcedure {
 				exception.printStackTrace();
 			}
 			sub1.addProperty("rate", 600);
+			sub1.addProperty("chance", 80);
 			main.add("events", sub1);
 			{
 				com.google.gson.Gson mainGSONBuilderVariable = new com.google.gson.GsonBuilder().setPrettyPrinting().create();
@@ -57,6 +58,7 @@ public class SetupconfigProcedure {
 					exception.printStackTrace();
 				}
 				sub1.addProperty("rate", 600);
+				sub1.addProperty("chance", 80);
 				main.add("events", sub1);
 				{
 					com.google.gson.Gson mainGSONBuilderVariable = new com.google.gson.GsonBuilder().setPrettyPrinting().create();

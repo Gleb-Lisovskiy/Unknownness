@@ -5,8 +5,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 
-import net.minecraft.world.level.LevelAccessor;
-
 import net.glebun08.mcreator.unknownness.network.UnknownnessModVariables;
 
 import javax.annotation.Nullable;
@@ -15,19 +13,17 @@ import javax.annotation.Nullable;
 public class PlayerExitProcedure {
 	@SubscribeEvent
 	public static void onPlayerLoggedOut(PlayerEvent.PlayerLoggedOutEvent event) {
-		execute(event, event.getEntity().level());
+		execute(event);
 	}
 
-	public static void execute(LevelAccessor world) {
-		execute(null, world);
+	public static void execute() {
+		execute(null);
 	}
 
-	private static void execute(@Nullable Event event, LevelAccessor world) {
-		if (UnknownnessModVariables.MapVariables.get(world).Players == 0) {
-			UnknownnessModVariables.MapVariables.get(world).FirstPlayer = "";
-			UnknownnessModVariables.MapVariables.get(world).syncData(world);
+	private static void execute(@Nullable Event event) {
+		if (UnknownnessModVariables.Players == 0) {
+			UnknownnessModVariables.FirstPlayer = "";
 		}
-		UnknownnessModVariables.MapVariables.get(world).Players = UnknownnessModVariables.MapVariables.get(world).Players - 1;
-		UnknownnessModVariables.MapVariables.get(world).syncData(world);
+		UnknownnessModVariables.Players = UnknownnessModVariables.Players - 1;
 	}
 }

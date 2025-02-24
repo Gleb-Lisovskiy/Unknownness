@@ -10,7 +10,11 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
+
+import net.glebun08.mcreator.unknownness.network.UnknownnessModVariables;
 
 import java.util.List;
 import java.util.Comparator;
@@ -20,6 +24,28 @@ public class ShadowTickProcedure {
 		if (entity == null)
 			return;
 		double y_player = 0;
+		double distance = 0;
+		if (UnknownnessModVariables.all_shadow_despawn == true) {
+			if (!entity.level().isClientSide())
+				entity.discard();
+		}
+		if (UnknownnessModVariables.event_4 > 0) {
+			distance = 256;
+			{
+				final Vec3 _center = new Vec3(x, y, z);
+				List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(9 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
+				for (Entity entityiterator : _entfound) {
+					if (entityiterator instanceof Player) {
+						if (!entity.level().isClientSide())
+							entity.discard();
+						if (world instanceof ServerLevel _level)
+							_level.sendParticles(ParticleTypes.CAMPFIRE_COSY_SMOKE, x, y, z, 80, 0.2, 1, 0.2, 1);
+					}
+				}
+			}
+		} else {
+			distance = 24;
+		}
 		if (entity.getPersistentData().getDouble("todespawn") > 1) {
 			entity.getPersistentData().putDouble("todespawn", (entity.getPersistentData().getDouble("todespawn") - 1));
 		}
@@ -37,7 +63,7 @@ public class ShadowTickProcedure {
 		if (entity.onGround()) {
 			{
 				final Vec3 _center = new Vec3(x, y, z);
-				List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(24 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
+				List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(distance / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
 				for (Entity entityiterator : _entfound) {
 					if (entityiterator instanceof Player) {
 						if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
@@ -48,11 +74,11 @@ public class ShadowTickProcedure {
 		}
 		{
 			final Vec3 _center = new Vec3(x, y, z);
-			List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(24 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
+			List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(distance / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
 			for (Entity entityiterator : _entfound) {
 				if (entityiterator instanceof Player) {
 					y_player = entityiterator.getY() + 1.5;
-					if (entityiterator.getPose() == Pose.SWIMMING || entityiterator instanceof LivingEntity _livEnt15 && _livEnt15.isSleeping()) {
+					if (entityiterator.getPose() == Pose.SWIMMING || entityiterator instanceof LivingEntity _livEnt20 && _livEnt20.isSleeping()) {
 						y_player = entityiterator.getY();
 					}
 					if (entityiterator.isShiftKeyDown()) {
